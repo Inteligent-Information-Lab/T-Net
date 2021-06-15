@@ -1,6 +1,7 @@
-## T-Net ##
+# T-Net #
 ----------
 This is the PyTorch implementation for our paper:
+
 **T-Net: Deep Stacked Scale-Iteration Network for Image Dehazing**
 
 ### Environment ###
