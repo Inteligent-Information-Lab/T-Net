@@ -12,16 +12,22 @@
 ----------
 - Dataset Google drive: https://drive.google.com/file/d/19pwuhQd1yBgA939AjbXTdkoZ91yiD4Kw/view?usp=sharing
 - Tarin Stack T-Net:
+```bash
 $`python trian.py -recurrent_iter 3 -updown_pairs 4 -rdb_pairs 3`
+```
 
 ### Test on synthetic data ###
 ----------
 - Dataset Google drive: https://drive.google.com/file/d/17KaYJXKkLU-5my7HUvEoTSREzzoyTAP7/view?usp=sharing
 - Test Stack T-Net:
+```bash
 $`python test.py -recurrent_iter 3 -updown_pairs 4 -rdb_pairs 3`
+```
 
 ### Test on real-world data ###
 ----------
 - Dataset Google drive: https://drive.google.com/file/d/1j7p8B8WdmrF3G4u8iwJXCbZrFsM7faHu/view?usp=sharing
 - Test Stack T-Net:
+```bash
 $`python apply.py -recurrent_iter 3 -updown_pairs 4 -rdb_pairs 3`"# T-Net" 
+```
