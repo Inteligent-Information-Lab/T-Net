@@ -52,7 +52,7 @@ class TrainData(data.Dataset):
         #    raise Exception('Bad image size: {}'.format(gt_name))
 
         # --- x,y coordinate of left-top corner --- #
-        # 随机裁剪
+        # Randomly cut
         # width = width // 2
         x, y = randrange(0, width - crop_width + 1), randrange(0, height - crop_height + 1)
         haze_crop_img = haze_img.crop((x, y, x + crop_width, y + crop_height))
@@ -69,7 +69,7 @@ class TrainData(data.Dataset):
             raise Exception('Bad image channel: {}'.format(haze_name))
 
         # --- If flip the picture --- #
-        # 随机翻转
+        # Randomly flip
         if (not self.no_flip) and random() < 0.5:
             idx = [i for i in range(haze.size(2) - 1, -1, -1)]
             idx = LongTensor(idx)
