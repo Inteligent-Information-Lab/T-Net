@@ -54,7 +54,7 @@ class TNet(nn.Module):
         self.width = width
         self.stride = stride
         self.depth_rate = depth_rate
-        # merge结构
+        # feature fusion parameters
         self.coefficient = nn.Parameter(torch.Tensor(np.ones((height, width, 2, depth_rate*stride**(height-1)))), requires_grad=attention)
         self.conv_in = nn.Conv2d(in_channels, depth_rate, kernel_size=kernel_size, padding=(kernel_size - 1) // 2)
         self.conv_out = nn.Conv2d(depth_rate, out_channels, kernel_size=kernel_size, padding=(kernel_size - 1) // 2)
