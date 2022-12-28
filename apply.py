@@ -13,9 +13,9 @@ import torch
 import argparse
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from app_data import AppData
-from rec_model import RecModel
-from utils import application
+from dataset.app_data import AppData
+from network.rec_model import RecModel
+from utils.utils import application
 
 # --- Parse hyper-parameters  --- #
 parser = argparse.ArgumentParser(description='Hyper-parameters for Stack T-Net')
@@ -41,8 +41,8 @@ network_height = updown_pairs + 1
 network_width = rdb_pairs * 2
 
 print('--- Hyper-parameters for testing ---')
-print('val_batch_size: {}\nrecurrent_iter: {}\nupdown_pairs: {}\nrdb_pairs: {}\nnum_dense_layer: {}\ngrowth_rate: {}\nlambda_loss: {}\ncategory: {}'
-      .format(val_batch_size, recurrent_iter, updown_pairs, rdb_pairs, num_dense_layer, growth_rate, lambda_loss, category))
+print('app_batch_size: {}\nrecurrent_iter: {}\nupdown_pairs: {}\nrdb_pairs: {}\nnum_dense_layer: {}\ngrowth_rate: {}\nlambda_loss: {}\ncategory: {}'
+      .format(app_batch_size, recurrent_iter, updown_pairs, rdb_pairs, num_dense_layer, growth_rate, lambda_loss, category))
 
 # --- Set category-specific hyper-parameters  --- #
 app_data_dir = './data/demo/'
@@ -67,7 +67,7 @@ net = nn.DataParallel(net, device_ids=device_ids)
 
 
 # --- Load the network weight --- #
-net.load_state_dict(torch.load(torch.load('{}_haze_best_{}_{}'.format(category, updown_pairs, rdb_pairs)))
+net.load_state_dict(torch.load('./checkpoint/'+'{}_haze_best_{}_{}'.format(category, updown_pairs, rdb_pairs)))
 
 
 # --- Use the evaluation model in testing --- #

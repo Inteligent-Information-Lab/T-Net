@@ -16,13 +16,13 @@ import torch.nn as nn
 import torch.nn.functional as F
 import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
-from train_data import TrainData
-from val_data import ValData
-from rec_model import RecModel
-from utils import to_psnr, to_ssim_skimage, print_log, validation, adjust_learning_rate
+from dataset.train_data import TrainData
+from dataset.val_data import ValData
+from network.rec_model import RecModel
+from utils.utils import to_psnr, to_ssim_skimage, print_log, validation, adjust_learning_rate
 from torchvision.models import vgg16
-from perceptual import LossNetwork
-from SSIM_loss import SSIM
+from utils.perceptual import LossNetwork
+from utils.SSIM_loss import SSIM
 plt.switch_backend('agg')
 
 
@@ -104,7 +104,7 @@ per_loss_net.eval()
 
 # --- Load the network weight --- #
 try:
-    net.load_state_dict(torch.load('{}_haze_best_{}_{}'.format(category, updown_pairs, rdb_pairs)))
+    net.load_state_dict(torch.load('./checkpoint/'+'{}_haze_best_{}_{}'.format(category, updown_pairs, rdb_pairs)))
     print('--- weight loaded ---')
 except:
     print('--- no weight loaded ---')
@@ -172,7 +172,7 @@ for epoch in range(num_epochs):
     train_ssim = sum(ssim_list) / len(ssim_list)
 
     # --- Save the network parameters --- #
-    torch.save(net.state_dict(), '{}_haze_{}_{}'.format(category, updown_pairs, rdb_pairs))
+    torch.save(net.state_dict(), './checkpoint/'+'{}_haze_{}_{}'.format(category, updown_pairs, rdb_pairs))
 
     # --- Use the evaluation model in testing --- #
     net.eval()

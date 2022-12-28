@@ -13,9 +13,9 @@ import torch
 import argparse
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from val_data import ValData
-from rec_model import RecModel
-from utils import validation
+from dataset.val_data import ValData
+from network.rec_model import RecModel
+from utils.utils import validation
 
 # --- Parse hyper-parameters  --- #
 parser = argparse.ArgumentParser(description='Hyper-parameters for Stack T-Net')
@@ -67,7 +67,7 @@ net = nn.DataParallel(net, device_ids=device_ids)
 
 
 # --- Load the network weight --- #
-net.load_state_dict(torch.load('{}_haze_best_{}_{}'.format(category, updown_pairs, rdb_pairs)))
+net.load_state_dict(torch.load('./checkpoint/'+'{}_haze_best_{}_{}'.format(category, updown_pairs, rdb_pairs)))
 
 
 # --- Use the evaluation model in testing --- #
