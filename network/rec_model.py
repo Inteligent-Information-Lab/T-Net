@@ -15,13 +15,13 @@ class RecModel(nn.Module):
     def __init__(self, recurrent_iter=2, height=4, width=6, depth_rate=16, num_dense_layer=4, growth_rate=16):
         super(RecModel, self).__init__()
         self.iteration = recurrent_iter
-        self.GridNet = TNet(height, width, depth_rate, num_dense_layer, growth_rate)
+        self.DehazeNet = TNet(height, width, depth_rate, num_dense_layer, growth_rate)
 
     def forward(self, input):
         x = input
         x_list = []
         for i in range(self.iteration):
             x = torch.cat((x, input), 1)
-            x = self.GridNet(x)
+            x = self.DehazeNet(x)
             x_list.append(x)
         return x, x_list
